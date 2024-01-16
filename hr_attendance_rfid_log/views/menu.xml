@@ -1,0 +1,9 @@
+<!-- <?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="menu_rfid_log" model="ir.ui.menu">
+        <field name="parent_id" ref="hr_attendance.menu_hr_attendance_report"/>
+        <field name="name">Logs</field>
+        <field name="sequence" eval="80"/>
+        <field name="action" ref="hr_attendance_rfid_log.action_rfid_attendance_log"/>
+    </record>
+</odoo> -->
