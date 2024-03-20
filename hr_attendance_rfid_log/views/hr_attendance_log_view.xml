@@ -6,12 +6,20 @@
         <field name="arch" type="xml">
             <tree decoration-danger="state == 'failed'">
                 <field name="state" />
+                <field name="retry_counter" />
                 <field name="timestamp" />
                 <field name="employee_id" />
                 <field name="rfid_card_code" />
-                <field name="action" />
-                <field name="error_message" attrs="{'invisible': [('state', '=', 'modified')]}"/>
+                <field name="action"  attrs="{'invisible': [('state', '=', 'retry')]}"/>
+                <field name="error_message" attrs="{'invisible': [('state', '!=', 'failed')]}"/>
                 <field name="create_date" />
+                    <button
+                        name="retry_now"
+                        class="oe_highlight"
+                        string="Retry Now"
+                        type="object"
+                        attrs="{'invisible': [('state', '!=', 'retry')]}"
+                    />
             </tree>
         </field>
     </record>
@@ -21,7 +29,6 @@
         <field name="arch" type="xml">
             <form>
                 <header>
-                    <field name="employee_assigned" invisible="1"/>
                     <field name="state" invisible="1"/>
                     <button
                         name="action_open_wizard_assign_employee"
@@ -34,14 +41,14 @@
                         name="set_to_retry_state"
                         class="oe_highlight"
                         string="Retry"
-                        attrs="{'invisible': ['|',('state', '=', 'success'), ('state', '=', 'retry')]}"
+                        attrs="{'invisible': ['|',('state', '=', 'success'), ('state', '=', 'retry'), ('employee_id', '!=', False)]}"
                         type="object"
                     />
                     <button
                         name="set_to_ignore_state"
                         class="btn-danger"
                         string="Ignore"
-                        attrs="{'invisible': [('state', '=', 'success')]}"
+                        attrs="{'invisible': [('state', '=', 'success'),('employee_id', '!=', False)]}"
                         type="object"
                     />
                     <field name="state" widget="statusbar" />
@@ -76,12 +83,6 @@
                                 options="{'mode': 'python'}"
                             />
                         </group>
-                    </group>
-                    <group
-                        string="Modified"
-                        name="modified"
-                        attrs="{'invisible': [('state', '!=', 'modified')]}"
-                    >
                     </group>
                 </sheet>
             </form>

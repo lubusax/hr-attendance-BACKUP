@@ -12,10 +12,11 @@
     "installable": True,
     "depends": ["hr_attendance_rfid"],
     "data": [
+        "data/ir_cron_data.xml",
+        "data/system_parameters.xml",
         "security/groups.xml",
         "security/ir.model.access.csv",
         # "data/ir_rule.xml",
-        #"views/menu.xml",
         "views/hr_attendance_log_view.xml",
         "wizards/hr_rfid_log_assign_employee.xml"
     ],

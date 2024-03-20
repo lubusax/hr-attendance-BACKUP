@@ -10,7 +10,7 @@
                     <field name="hr_attendance_rfid_log_id" invisible="1"/>
                     <field name="warning_message" 
                         attrs="{'invisible': ['|',('employee_id', '=', False), ('warning_message', '=', '')]}"
-                        class="alert alert-danger" />
+                        class="o_alert o_alert-danger" />
                     <field name="rfid_card_code" />
                     <field name="employee_id" />
                 </group>
